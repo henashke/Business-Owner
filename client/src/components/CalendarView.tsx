@@ -1,10 +1,9 @@
 import {useState} from 'react';
 import {observer} from 'mobx-react-lite';
-import {Box, Button, Card, CardContent, Grid, Typography,} from '@mui/material';
-import AddIcon from '@mui/icons-material/Add';
+import {Box, Grid} from '@mui/material';
 import {useStore} from '../context/StoreContext';
-import AppointmentCard from './AppointmentCard';
 import {AddAppointmentDialog} from "./AddAppointmentDialog.tsx";
+import {CalendarDayCard} from "./CalendarDayCard.tsx";
 
 interface CalendarViewProps {
     days: Date[];
@@ -30,52 +29,19 @@ export const CalendarView = observer(({days, gridSize}: CalendarViewProps) => {
         });
     };
 
-    const dayNames = ['ראשון', 'שני', 'שלישי', 'רביעי', 'חמישי', 'שישי', 'שבת'];
-
     return (
         <Box>
             <Grid container spacing={2}>
                 {days.map((day, idx) => {
                     const appointments = getAppointmentsForDay(day);
-                    const dayName = dayNames[day.getDay()];
-                    const dayStr = day.toLocaleDateString('he-IL');
 
                     return (
                         <Grid item xs={gridSize.xs} sm={gridSize.sm} md={gridSize.md} key={idx}>
-                            <Card sx={{height: '100%', display: 'flex', flexDirection: 'column'}}>
-                                <CardContent sx={{
-                                    flex: 1,
-                                    justifyContent: "space-between",
-                                    display: "flex",
-                                    flexDirection: "column"
-                                }}>
-                                    <Typography variant="h6" sx={{mb: 1}}>
-                                        {dayName} - {dayStr}
-                                    </Typography>
-
-                                    <Box sx={{mb: 2}}>
-                                        {appointments.length === 0 ? (
-                                            <Typography variant="body2" color="textSecondary">
-                                                אין תורים
-                                            </Typography>
-                                        ) : (
-                                            appointments.map((apt) => (
-                                                <AppointmentCard appointmentDTO={apt}/>
-                                            ))
-                                        )}
-                                    </Box>
-
-                                    <Button
-                                        fullWidth
-                                        variant="outlined"
-                                        startIcon={<AddIcon/>}
-                                        onClick={() => handleOpenDialog(day)}
-                                        sx={{mt: 1}}
-                                    >
-                                        הוסף תור
-                                    </Button>
-                                </CardContent>
-                            </Card>
+                            <CalendarDayCard
+                                day={day}
+                                appointments={appointments}
+                                onAddAppointment={handleOpenDialog}
+                            />
                         </Grid>
                     );
                 })}
@@ -87,6 +53,3 @@ export const CalendarView = observer(({days, gridSize}: CalendarViewProps) => {
 
     );
 });
-
-export default CalendarView;
-

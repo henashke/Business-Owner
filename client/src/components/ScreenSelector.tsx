@@ -40,7 +40,7 @@ export const ScreenSelector = () => {
                 <ToggleButton value={AvailableScreens.DAILY_CALENDAR}>תורים - יומי</ToggleButton>
             </ToggleButtonGroup>
 
-            <Container sx={{paddingY: 2}}>
+            <Container sx={{paddingY: 2, flex: 1, overflow: "hidden"}}>
                 <Routes>
                     <Route path="/" element={<DailyCalendarView/>}/>
                     <Route path="/daily" element={<DailyCalendarView/>}/>
