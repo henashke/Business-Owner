@@ -1,22 +1,22 @@
-import React, { useState } from 'react';
-import { observer } from 'mobx-react-lite';
+import {useState} from 'react';
+import {observer} from 'mobx-react-lite';
 import {
   Box,
+  Button,
   Card,
   CardContent,
-  Typography,
-  Button,
   Dialog,
-  DialogTitle,
-  DialogContent,
   DialogActions,
-  TextField,
+  DialogContent,
+  DialogTitle,
   Grid,
   Stack,
+  TextField,
+  Typography,
 } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
-import { useStore } from '../context/StoreContext';
-import { AppointmentDTO } from '../services/appointmentApi';
+import {useStore} from '../context/StoreContext';
+import {AppointmentDTO} from '../services/appointmentApi';
 
 interface CalendarViewProps {
   range: 'day' | 'week';

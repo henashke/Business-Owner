@@ -10,22 +10,25 @@
     "lint": "eslint . --ext .ts,.tsx"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.3",
+    "@mui/icons-material": "^5.14.20",
+    "@mui/material": "^5.14.20",
+    "@types/stylis": "^4.2.7",
     "axios": "^1.6.2",
     "mobx": "^6.10.2",
     "mobx-react-lite": "^4.0.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.20.0",
-    "@emotion/react": "^11.11.3",
-    "@emotion/styled": "^11.11.3",
-    "@mui/icons-material": "^5.14.20",
-    "@mui/material": "^5.14.20"
+    "stylis": "^4.3.6",
+    "stylis-plugin-rtl": "^2.1.1"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^6.15.0",
-    "@typescript-eslint/parser": "^6.15.0",
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
+    "@typescript-eslint/eslint-plugin": "^6.15.0",
+    "@typescript-eslint/parser": "^6.15.0",
     "@vitejs/plugin-react": "^4.2.1",
     "eslint": "^8.55.0",
     "eslint-plugin-react": "^7.33.2",
@@ -33,4 +36,3 @@
     "vite": "^5.0.8"
   }
 }
-
