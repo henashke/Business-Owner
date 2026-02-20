@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="com.obiscr.chatgpt.settings.EasyCodeState">
+    <option name="projectFiles" value="$PROJECT_DIR$/src/main/java/com/eyebrow/api/dao/CustomerDAO.java;N:/Dev/repos/Business-Owner/api/src/main/java/com/eyebrow/api/dto/CustomerDTO.java;N:/Dev/repos/Business-Owner/api/src/main/java/com/eyebrow/api/entity/Customer.java;N:/Dev/repos/Business-Owner/api/src/main/java/com/eyebrow/api/resource/CustomerResource.java;N:/Dev/repos/Business-Owner/api/src/main/java/com/eyebrow/api/service/CustomerService.java;N:/Dev/repos/Business-Owner/api/target/build-metrics.json" />
+  </component>
+</project>

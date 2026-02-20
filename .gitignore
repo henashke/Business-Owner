@@ -1,0 +1,71 @@
+# Repository root .gitignore
+
+# Maven/Java
+/target/
+**/target/
+*.class
+*.jar
+*.war
+*.ear
+
+# IntelliJ / JetBrains
+/.idea/
+*.iml
+out/
+
+# VSCode - keep extensions.json if present (matches client/.gitignore)
+.vscode/*
+!.vscode/extensions.json
+
+# Node / frontend
+/client/node_modules/
+/client/dist/
+/client/dist-ssr/
+client/node_modules/
+client/dist/
+client/dist-ssr/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Environment
+.env
+.env.*
+.env.*.local
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Coverage / build outputs
+coverage/
+build/
+.tmp/
+
+# Misc
+*.local
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Ignore IDE workspace snapshots (some are present in the repo metadata)
+**/.idea/
+**/.idea/**
+
+# Ignore node_modules at any level (safe because real source repos typically keep them out)
+node_modules/
+
+# Ignore generated quarkus/bootstrap directory
+/target/quarkus/
+
+# Keep Flyway migrations and resources (do not ignore src/main/resources/db/migration)
+
+# End of file
+
