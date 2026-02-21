@@ -48,35 +48,35 @@ export function ThemeModeProvider({ children }: { children: React.ReactNode }) {
         palette: {
           mode,
           primary: {
-            50: '#F3E8FF',
-            100: '#E9D5FF',
-            200: '#D8B4FE',
-            300: '#C084FC',
-            400: '#A855F7',
-            main: '#7C4DFF',
+            50: '#EEF2FF',
+            100: '#E0E7FF',
+            200: '#C7D2FE',
+            300: '#A5B4FC',
+            400: '#818CF8',
+            main: '#6366F1',
+            500: '#6366F1',
+            600: '#4F46E5',
+            700: '#4338CA',
+            800: '#3730A3',
+            900: '#312E81',
+          } as any,
+          secondary: {
+            50: '#F5F3FF',
+            100: '#EDE9FE',
+            200: '#DDD6FE',
+            300: '#C4B5FD',
+            400: '#A78BFA',
+            main: '#8B5CF6',
             500: '#8B5CF6',
-            600: '#7C4DFF',
+            600: '#7C3AED',
             700: '#6D28D9',
             800: '#5B21B6',
             900: '#4C1D95',
           } as any,
-          secondary: {
-            50: '#E6F7F1',
-            100: '#CFF0E4',
-            200: '#A8E3CF',
-            300: '#7DD5BA',
-            400: '#52C7A5',
-            main: '#1DBF73',
-            500: '#1DBF73',
-            600: '#14A765',
-            700: '#0F8F56',
-            800: '#0C7447',
-            900: '#095C38',
-          } as any,
           ...(mode === 'light'
-            ? {
+              ? {
                 background: {
-                  default: '#F8FAFC',
+                  default: '#F9FAFB',
                   paper: '#FFFFFF',
                 },
                 text: {
@@ -84,14 +84,14 @@ export function ThemeModeProvider({ children }: { children: React.ReactNode }) {
                   secondary: '#6B7280',
                 },
               }
-            : {
+              : {
                 background: {
-                  default: '#0F0B1F',
-                  paper: '#151028',
+                  default: '#0B1120',
+                  paper: '#111827',
                 },
                 text: {
                   primary: '#F3F4F6',
-                  secondary: '#B3B3C6',
+                  secondary: '#9CA3AF',
                 },
               }),
         },
@@ -103,6 +103,7 @@ export function ThemeModeProvider({ children }: { children: React.ReactNode }) {
           fontFamily: [
             '-apple-system',
             'BlinkMacSystemFont',
+              'Calibri',
             '"Segoe UI"',
             'Roboto',
             '"Helvetica Neue"',
