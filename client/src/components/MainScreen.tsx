@@ -1,4 +1,4 @@
-import {Container} from '@mui/material';
+import {Box} from '@mui/material';
 import {observer} from 'mobx-react-lite';
 import {Header} from './Header';
 import {ScreenSelector} from "./ScreenSelector.tsx";
@@ -6,7 +6,7 @@ import {ScreenSelector} from "./ScreenSelector.tsx";
 export const MainScreen = observer(() => {
 
     return (
-        <Container sx={{
+        <Box sx={{
             display: "flex",
             alignItems: "center",
             flexDirection: "column",
@@ -15,7 +15,7 @@ export const MainScreen = observer(() => {
         }}>
             <Header/>
             <ScreenSelector/>
-        </Container>
+        </Box>
     );
 });
 

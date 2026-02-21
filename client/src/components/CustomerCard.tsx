@@ -1,7 +1,8 @@
-import {Box, Card, CardContent, Chip, IconButton, Typography} from '@mui/material';
+import {Box, Card, CardContent, IconButton, Typography, useTheme} from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import {useThemeMode} from '../context/ThemeContext';
+import Avatar from './Avatar';
+import StatusBadge from './StatusBadge';
 
 interface CustomerCardProps {
     id: number;
@@ -14,72 +15,60 @@ interface CustomerCardProps {
 }
 
 export const CustomerCard = ({
-    id,
-    firstName,
-    lastName,
-    phoneNumber,
-    active,
-    onEdit,
-    onDelete,
-}: CustomerCardProps) => {
-    const theme = useThemeMode();
+                                 id,
+                                 firstName,
+                                 lastName,
+                                 phoneNumber,
+                                 active,
+                                 onEdit,
+                                 onDelete,
+                             }: CustomerCardProps) => {
+    const theme = useTheme();
+
+    const ActionButtons = () =>
+        <Box sx={{display: 'flex'}}>
+            <IconButton onClick={() => onEdit(id)}>
+                <EditIcon/>
+            </IconButton>
+            <IconButton onClick={() => onDelete(id)}>
+                <DeleteIcon/>
+            </IconButton>
+        </Box>
 
     return (
         <Card
             sx={{
-                backgroundColor: theme.mode === 'dark' ? '#253242' : 'white',
-                mb: 1.5,
-                boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
+                display: 'flex',
+                border: `1px solid ${theme.palette.divider}`,
+                transition: 'all 0.2s ease',
+                '&:hover': {
+                    cursor: 'pointer',
+                    backgroundColor: theme.palette.primary.main,
+                },
             }}
         >
             <CardContent
                 sx={{
                     display: 'flex',
-                    justifyContent: 'space-between',
                     alignItems: 'center',
-                    py: 2,
-                    '&:last-child': { pb: 2 },
+                    gap: 3,
                 }}
             >
-                <Box sx={{flex: 1}}>
-                    <Typography variant="h6" sx={{fontWeight: 'bold', mb: 0.5}}>
+                <Avatar initials={`${firstName[0]}${lastName[0]}`}/>
+
+                <Box sx={{display: "flex", flexDirection: "column", gap: 1}}>
+                    <Typography variant="h6">
                         {firstName} {lastName}
                     </Typography>
+
                     {phoneNumber && (
-                        <Typography variant="body2" color="textSecondary" sx={{mb: 0.5}}>
+                        <Typography variant="body2">
                             {phoneNumber}
                         </Typography>
                     )}
-                    <Chip
-                        label={active ? 'פעיל' : 'לא פעיל'}
-                        color={active ? 'success' : 'default'}
-                        size="small"
-                        sx={{
-                            backgroundColor: active ? '#27ae60' : '#95a5a6',
-                            color: 'white',
-                            fontWeight: 'bold',
-                        }}
-                    />
+                    <StatusBadge status={active ? 'active' : 'inactive'}/>
                 </Box>
-
-                <Box sx={{display: 'flex', gap: 1}}>
-                    <IconButton
-                        size="small"
-                        onClick={() => onEdit(id)}
-                        color="primary"
-                        title="ערוך לקוח"
-                    >
-                        <EditIcon fontSize="small" />
-                    </IconButton>
-                    <IconButton
-                        size="small"
-                        onClick={() => onDelete(id)}
-                        color="error"
-                        title="מחק לקוח"
-                    >
-                        <DeleteIcon fontSize="small" />
-                    </IconButton>
-                </Box>
+                <ActionButtons/>
             </CardContent>
         </Card>
     );
