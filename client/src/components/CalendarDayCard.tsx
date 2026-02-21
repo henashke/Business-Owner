@@ -1,4 +1,4 @@
-import {Button, Card, CardContent, Typography, Box} from '@mui/material';
+import {Box, Button, Card, CardContent, Typography} from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import {AppointmentDTO} from '../services/appointmentApi';
 import AppointmentCard from './AppointmentCard';
@@ -23,20 +23,23 @@ export const CalendarDayCard = ({day, appointments, onAddAppointment}: CalendarD
                 display: "flex",
                 flexDirection: "column"
             }}>
-                <Typography variant="h6" sx={{mb: 1}}>
-                    {dayName} - {dayStr}
-                </Typography>
+                <Box>
 
-                <Box sx={{mb: 2}}>
-                    {appointments.length === 0 ? (
-                        <Typography variant="body2" color="textSecondary">
-                            אין טיפולים
-                        </Typography>
-                    ) : (
-                        appointments.map((apt) => (
-                            <AppointmentCard key={apt.id} appointmentDTO={apt}/>
-                        ))
-                    )}
+                    <Typography variant="h6" sx={{mb: 1}}>
+                        {dayName} - {dayStr}
+                    </Typography>
+
+                    <Box sx={{mb: 2}}>
+                        {appointments.length === 0 ? (
+                            <Typography variant="body2" color="textSecondary">
+                                אין טיפולים
+                            </Typography>
+                        ) : (
+                            appointments.map((apt) => (
+                                <AppointmentCard key={apt.id} appointmentDTO={apt}/>
+                            ))
+                        )}
+                    </Box>
                 </Box>
 
                 <Button
@@ -44,7 +47,6 @@ export const CalendarDayCard = ({day, appointments, onAddAppointment}: CalendarD
                     variant="outlined"
                     startIcon={<AddIcon/>}
                     onClick={() => onAddAppointment(day)}
-                    sx={{mt: 1}}
                 >
                     הוסף תור
                 </Button>

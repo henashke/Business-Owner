@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import {observer} from 'mobx-react-lite';
-import {Box, Button, Stack, Typography} from '@mui/material';
+import {Button, Stack, Typography} from '@mui/material';
 import {CalendarView} from './CalendarView';
 
 export const WeeklyCalendarView = observer(() => {
@@ -24,7 +24,7 @@ export const WeeklyCalendarView = observer(() => {
   const days = getDaysToDisplay();
 
   return (
-    <Box>
+    <>
       <Stack direction="row" spacing={2} sx={{ mb: 3 }}>
         <Button
           onClick={() => {
@@ -50,7 +50,7 @@ export const WeeklyCalendarView = observer(() => {
       </Stack>
 
       <CalendarView days={days} gridSize={{ xs: 6, sm: 6, md: 4 }} />
-    </Box>
+    </>
   );
 });
 

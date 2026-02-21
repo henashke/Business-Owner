@@ -41,160 +41,18 @@ export const FullCustomerList = ({
     return (
         <>
             <Box sx={{display: 'flex', flexDirection: 'column', gap: 2}}>
-                {customers.map((customer) => (
-                    <>
-                        <CustomerCard
-                            key={customer.id}
-                            id={customer.id ?? -1}
-                            firstName={customer.firstName}
-                            lastName={customer.lastName}
-                            phoneNumber={customer.phoneNumber}
-                            active={customer.active}
-                            onEdit={handleCardEdit}
-                            onDelete={handleCardDelete}
-                        />
-                        <CustomerCard
-                            key={customer.id}
-                            id={customer.id ?? -1}
-                            firstName={customer.firstName}
-                            lastName={customer.lastName}
-                            phoneNumber={customer.phoneNumber}
-                            active={customer.active}
-                            onEdit={handleCardEdit}
-                            onDelete={handleCardDelete}
-                        />
-                        <CustomerCard
-                            key={customer.id}
-                            id={customer.id ?? -1}
-                            firstName={customer.firstName}
-                            lastName={customer.lastName}
-                            phoneNumber={customer.phoneNumber}
-                            active={customer.active}
-                            onEdit={handleCardEdit}
-                            onDelete={handleCardDelete}
-                        />
-                        <CustomerCard
-                            key={customer.id}
-                            id={customer.id ?? -1}
-                            firstName={customer.firstName}
-                            lastName={customer.lastName}
-                            phoneNumber={customer.phoneNumber}
-                            active={customer.active}
-                            onEdit={handleCardEdit}
-                            onDelete={handleCardDelete}
-                        />
-                        <CustomerCard
-                            key={customer.id}
-                            id={customer.id ?? -1}
-                            firstName={customer.firstName}
-                            lastName={customer.lastName}
-                            phoneNumber={customer.phoneNumber}
-                            active={customer.active}
-                            onEdit={handleCardEdit}
-                            onDelete={handleCardDelete}
-                        />
-                        <CustomerCard
-                            key={customer.id}
-                            id={customer.id ?? -1}
-                            firstName={customer.firstName}
-                            lastName={customer.lastName}
-                            phoneNumber={customer.phoneNumber}
-                            active={customer.active}
-                            onEdit={handleCardEdit}
-                            onDelete={handleCardDelete}
-                        />
-                        <CustomerCard
-                            key={customer.id}
-                            id={customer.id ?? -1}
-                            firstName={customer.firstName}
-                            lastName={customer.lastName}
-                            phoneNumber={customer.phoneNumber}
-                            active={customer.active}
-                            onEdit={handleCardEdit}
-                            onDelete={handleCardDelete}
-                        />
-                        <CustomerCard
-                            key={customer.id}
-                            id={customer.id ?? -1}
-                            firstName={customer.firstName}
-                            lastName={customer.lastName}
-                            phoneNumber={customer.phoneNumber}
-                            active={customer.active}
-                            onEdit={handleCardEdit}
-                            onDelete={handleCardDelete}
-                        />
-                        <CustomerCard
-                            key={customer.id}
-                            id={customer.id ?? -1}
-                            firstName={customer.firstName}
-                            lastName={customer.lastName}
-                            phoneNumber={customer.phoneNumber}
-                            active={customer.active}
-                            onEdit={handleCardEdit}
-                            onDelete={handleCardDelete}
-                        />
-                        <CustomerCard
-                            key={customer.id}
-                            id={customer.id ?? -1}
-                            firstName={customer.firstName}
-                            lastName={customer.lastName}
-                            phoneNumber={customer.phoneNumber}
-                            active={customer.active}
-                            onEdit={handleCardEdit}
-                            onDelete={handleCardDelete}
-                        />
-                        <CustomerCard
-                            key={customer.id}
-                            id={customer.id ?? -1}
-                            firstName={customer.firstName}
-                            lastName={customer.lastName}
-                            phoneNumber={customer.phoneNumber}
-                            active={customer.active}
-                            onEdit={handleCardEdit}
-                            onDelete={handleCardDelete}
-                        />
-                        <CustomerCard
-                            key={customer.id}
-                            id={customer.id ?? -1}
-                            firstName={customer.firstName}
-                            lastName={customer.lastName}
-                            phoneNumber={customer.phoneNumber}
-                            active={customer.active}
-                            onEdit={handleCardEdit}
-                            onDelete={handleCardDelete}
-                        />
-                        <CustomerCard
-                            key={customer.id}
-                            id={customer.id ?? -1}
-                            firstName={customer.firstName}
-                            lastName={customer.lastName}
-                            phoneNumber={customer.phoneNumber}
-                            active={customer.active}
-                            onEdit={handleCardEdit}
-                            onDelete={handleCardDelete}
-                        />
-                        <CustomerCard
-                            key={customer.id}
-                            id={customer.id ?? -1}
-                            firstName={customer.firstName}
-                            lastName={customer.lastName}
-                            phoneNumber={customer.phoneNumber}
-                            active={customer.active}
-                            onEdit={handleCardEdit}
-                            onDelete={handleCardDelete}
-                        />
-                        <CustomerCard
-                            key={customer.id}
-                            id={customer.id ?? -1}
-                            firstName={customer.firstName}
-                            lastName={customer.lastName}
-                            phoneNumber={customer.phoneNumber}
-                            active={customer.active}
-                            onEdit={handleCardEdit}
-                            onDelete={handleCardDelete}
-                        />
-                    </>
-                ))}
+                {customers.map((customer) =>
+                    <CustomerCard
+                        key={customer.id}
+                        id={customer.id ?? -1}
+                        firstName={customer.firstName}
+                        lastName={customer.lastName}
+                        phoneNumber={customer.phoneNumber}
+                        active={customer.active}
+                        onEdit={handleCardEdit}
+                        onDelete={handleCardDelete}
+                    />
+                )}
             </Box>
 
             <DeleteConfirmDialog

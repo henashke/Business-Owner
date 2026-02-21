@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import {observer} from 'mobx-react-lite';
-import {Box, Grid} from '@mui/material';
+import {Grid} from '@mui/material';
 import {useStore} from '../context/StoreContext';
 import {AddAppointmentDialog} from "./AddAppointmentDialog.tsx";
 import {CalendarDayCard} from "./CalendarDayCard.tsx";
@@ -30,8 +30,8 @@ export const CalendarView = observer(({days, gridSize}: CalendarViewProps) => {
     };
 
     return (
-        <Box>
-            <Grid container spacing={2}>
+        <>
+            <Grid container spacing={2} sx={{paddingX: 2, paddingBottom: 2, flex: 1}}>
                 {days.map((day, idx) => {
                     const appointments = getAppointmentsForDay(day);
 
@@ -49,7 +49,7 @@ export const CalendarView = observer(({days, gridSize}: CalendarViewProps) => {
             <AddAppointmentDialog dialogDate={dialogDate}
                                   openDialog={openDialog}
                                   handleCloseDialog={() => setOpenDialog(false)}/>
-        </Box>
+        </>
 
     );
 });
