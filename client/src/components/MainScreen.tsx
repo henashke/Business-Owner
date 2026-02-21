@@ -1,20 +1,14 @@
-import {Box} from '@mui/material';
 import {observer} from 'mobx-react-lite';
 import {Header} from './Header';
-import {ScreenSelector} from "./ScreenSelector.tsx";
+import {Routing} from "./Routing.tsx";
+import {Box} from "@mui/material";
 
 export const MainScreen = observer(() => {
 
     return (
-        <Box sx={{
-            display: "flex",
-            alignItems: "center",
-            flexDirection: "column",
-            width: '100vw',
-            height: '100vh'
-        }}>
+        <Box sx={{display: 'flex', flexDirection: 'column', height: '100vh', gap: 2}}>
             <Header/>
-            <ScreenSelector/>
+            <Routing/>
         </Box>
     );
 });

@@ -30,7 +30,7 @@ export const CalendarDayCard = ({day, appointments, onAddAppointment}: CalendarD
                 <Box sx={{mb: 2}}>
                     {appointments.length === 0 ? (
                         <Typography variant="body2" color="textSecondary">
-                            אין תורים
+                            אין טיפולים
                         </Typography>
                     ) : (
                         appointments.map((apt) => (

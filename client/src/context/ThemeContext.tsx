@@ -86,8 +86,8 @@ export function ThemeModeProvider({ children }: { children: React.ReactNode }) {
               }
               : {
                 background: {
-                  default: '#0B1120',
-                  paper: '#111827',
+                  default: '#08162b',
+                  paper: '#212a43',
                 },
                 text: {
                   primary: '#F3F4F6',

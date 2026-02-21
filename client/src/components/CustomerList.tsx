@@ -7,7 +7,7 @@ import {EmptyCustomerList} from './EmptyCustomerList';
 import {FullCustomerList} from './FullCustomerList';
 import {CustomerFormDialog} from './CustomerFormDialog';
 import {CustomerDTO} from '../services/customerApi';
-import { Box } from "@mui/material";
+import {Box, Paper} from "@mui/material";
 
 export const CustomerList = observer(() => {
     const {customerStore} = useStore();
@@ -54,20 +54,37 @@ export const CustomerList = observer(() => {
     };
 
     return (
-        <Box sx={{ display: "flex", flexDirection: "column", gap: 2, minWidth: "0", flex: 1, overflow: "auto" }}>
+        <Box sx={{
+            display: "flex",
+            flexDirection: "column",
+            gap: 2,
+            flex: 1,
+            overflow: "scroll",
+            paddingX: 2,
+            paddingBottom: 2
+        }}>
             <SearchBar value={searchQuery} onChange={setSearchQuery}/>
 
-            {filteredCustomers.length === 0 ?
-                <EmptyCustomerList searchQuery={searchQuery} onAddClick={() => handleOpenForm()}/>
-                :
-                <FullCustomerList
-                    customers={filteredCustomers}
-                    onEditClick={(id) => {
-                        const customer = customerStore.customers.find((c) => c.id === id);
-                        handleOpenForm(customer);
-                    }}
-                />
-            }
+            <Paper sx={{
+                display: 'flex',
+                padding: 2,
+                flexDirection: 'column',
+                gap: 1,
+                overflow: 'scroll',
+                flex: 1
+            }}>
+                {customerStore.customers.length === 0 ?
+                    <EmptyCustomerList searchQuery={searchQuery} onAddClick={() => handleOpenForm()}/>
+                    :
+                    <FullCustomerList
+                        customers={filteredCustomers}
+                        onEditClick={(id) => {
+                            const customer = customerStore.customers.find((c) => c.id === id);
+                            handleOpenForm(customer);
+                        }}
+                    />
+                }
+            </Paper>
 
             <FloatingActionButton onClick={() => handleOpenForm()}/>
 

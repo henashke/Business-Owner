@@ -45,6 +45,7 @@ export const CustomerCard = ({
                     cursor: 'pointer',
                     backgroundColor: theme.palette.primary.main,
                 },
+                minHeight: 100,
             }}
         >
             <CardContent

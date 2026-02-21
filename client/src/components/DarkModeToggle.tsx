@@ -11,8 +11,6 @@ export default function DarkModeToggle() {
       <IconButton
         onClick={toggleMode}
         size="large"
-        color="primary"
-        aria-label="toggle dark mode"
       >
         {mode === 'light' ? <DarkModeIcon fontSize="medium" /> : <LightModeIcon fontSize="medium" />}
       </IconButton>

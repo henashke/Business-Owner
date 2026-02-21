@@ -1,8 +1,5 @@
-import {Box, ToggleButton, ToggleButtonGroup} from "@mui/material";
-import {Route, Routes, useLocation, useNavigate} from "react-router-dom";
-import WeeklyCalendarView from "./WeeklyCalendarView.tsx";
-import DailyCalendarView from "./DailyCalendarView.tsx";
-import CustomerList from "./CustomerList.tsx";
+import {ToggleButton, ToggleButtonGroup} from "@mui/material";
+import {useLocation, useNavigate} from "react-router-dom";
 
 enum AvailableScreens {
     CUSTOMERS = 'customers',
@@ -27,27 +24,16 @@ export const ScreenSelector = () => {
     };
 
     return (
-        <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: "center", alignItems: "center", width: '100%', flex: 1}}>
             <ToggleButtonGroup
                 value={currentView}
                 exclusive
-                sx={{direction: 'ltr'}}
+                sx={{direction: 'ltr', paddingbottom: 2}}
                 onChange={handleViewChange}
                 size="small"
             >
+                <ToggleButton value={AvailableScreens.DAILY_CALENDAR}>טיפולים - היום</ToggleButton>
+                <ToggleButton value={AvailableScreens.WEEKLY_CALENDAR}>טיפולים - שבועי</ToggleButton>
                 <ToggleButton value={AvailableScreens.CUSTOMERS}>לקוחות</ToggleButton>
-                <ToggleButton value={AvailableScreens.WEEKLY_CALENDAR}>תורים - שבועי</ToggleButton>
-                <ToggleButton value={AvailableScreens.DAILY_CALENDAR}>תורים - יומי</ToggleButton>
             </ToggleButtonGroup>
-
-            <Box sx={{paddingTop: 2, flex: 1, width: '100%'}}>
-                <Routes>
-                    <Route path="/" element={<DailyCalendarView/>}/>
-                    <Route path="/daily" element={<DailyCalendarView/>}/>
-                    <Route path="/weekly" element={<WeeklyCalendarView/>}/>
-                    <Route path="/customers" element={<CustomerList/>}/>
-                </Routes>
-            </Box>
-        </Box>
     )
 }
