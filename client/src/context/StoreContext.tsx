@@ -1,15 +1,18 @@
 import React, { createContext, useContext } from 'react';
 import { CustomerStore, customerStore } from '../stores/CustomerStore';
 import { AppointmentStore, appointmentStore } from '../stores/AppointmentStore';
+import { LeadStore, leadStore } from '../stores/LeadStore';
 
 type Stores = {
   customerStore: CustomerStore;
   appointmentStore: AppointmentStore;
+  leadStore: LeadStore;
 };
 
 const defaultStores: Stores = {
   customerStore,
   appointmentStore,
+  leadStore,
 };
 
 const StoreContext = createContext<Stores>(defaultStores);

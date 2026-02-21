@@ -1,39 +1,88 @@
-import {ToggleButton, ToggleButtonGroup} from "@mui/material";
-import {useLocation, useNavigate} from "react-router-dom";
+import { Box, ToggleButton, ToggleButtonGroup } from "@mui/material";
+import { useLocation, useNavigate } from "react-router-dom";
 
-enum AvailableScreens {
+export enum AvailableScreens {
+    CALENDAR = 'calendar',
     CUSTOMERS = 'customers',
-    WEEKLY_CALENDAR = 'weekly',
-    DAILY_CALENDAR = 'daily',
+    LEADS = 'leads',
+}
+
+export enum CalendarSubView {
+    DAILY = 'daily',
+    WEEKLY = 'weekly',
 }
 
 export const ScreenSelector = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
-    const getCurrentView = () => {
+    const getMainView = (): AvailableScreens => {
         if (location.pathname === '/customers') return AvailableScreens.CUSTOMERS;
-        if (location.pathname === '/weekly') return AvailableScreens.WEEKLY_CALENDAR;
-        return AvailableScreens.DAILY_CALENDAR;
+        if (location.pathname === '/leads') return AvailableScreens.LEADS;
+        return AvailableScreens.CALENDAR;
     };
 
-    const currentView = getCurrentView();
+    const currentMainView = getMainView();
 
-    const handleViewChange = (_: React.MouseEvent<HTMLElement>, next: AvailableScreens) => {
-        if (next) navigate(`/${next}`);
+    const handleMainChange = (_: React.MouseEvent<HTMLElement>, next: AvailableScreens | null) => {
+        if (!next) return;
+        if (next === AvailableScreens.CALENDAR) {
+            if (location.pathname === '/customers' || location.pathname === '/leads') {
+                navigate(`/${CalendarSubView.DAILY}`);
+            } else {
+                navigate(location.pathname);
+            }
+        } else {
+            navigate(`/${next}`);
+        }
     };
 
     return (
             <ToggleButtonGroup
-                value={currentView}
+                value={currentMainView}
                 exclusive
-                sx={{direction: 'ltr', paddingbottom: 2}}
-                onChange={handleViewChange}
+                sx={{ direction: 'ltr', paddingBottom: 2 }}
+                onChange={handleMainChange}
                 size="small"
+                aria-label="main view selector"
             >
-                <ToggleButton value={AvailableScreens.DAILY_CALENDAR}>טיפולים - היום</ToggleButton>
-                <ToggleButton value={AvailableScreens.WEEKLY_CALENDAR}>טיפולים - שבועי</ToggleButton>
+                <ToggleButton value={AvailableScreens.CALENDAR}>טיפולים</ToggleButton>
                 <ToggleButton value={AvailableScreens.CUSTOMERS}>לקוחות</ToggleButton>
+                <ToggleButton value={AvailableScreens.LEADS}>לידים</ToggleButton>
             </ToggleButtonGroup>
+    )
+}
+
+export const CalendarSubSelector = () => {
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const getCalendarView = (): CalendarSubView => {
+        if (location.pathname === '/weekly') return CalendarSubView.WEEKLY;
+        return CalendarSubView.DAILY;
+    };
+
+    if (location.pathname === '/customers' || location.pathname === '/leads') return null;
+
+    const currentCalendarView = getCalendarView();
+
+    const handleCalendarSubChange = (_: React.MouseEvent<HTMLElement>, next: CalendarSubView | null) => {
+        if (!next) return;
+        navigate(`/${next}`);
+    };
+
+    return (
+        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+            <ToggleButtonGroup
+                value={currentCalendarView}
+                exclusive
+                onChange={handleCalendarSubChange}
+                size="small"
+                aria-label="calendar subview selector"
+            >
+                <ToggleButton value={CalendarSubView.DAILY}>יומי</ToggleButton>
+                <ToggleButton value={CalendarSubView.WEEKLY}>שבועי</ToggleButton>
+            </ToggleButtonGroup>
+        </Box>
     )
 }
