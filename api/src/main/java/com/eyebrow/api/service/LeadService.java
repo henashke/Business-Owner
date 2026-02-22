@@ -1,9 +1,11 @@
 package com.eyebrow.api.service;
 
 import com.eyebrow.api.dao.LeadDAO;
+import com.eyebrow.api.dao.TreatmentTypeDAO;
 import com.eyebrow.api.dto.LeadDTO;
 import com.eyebrow.api.entity.Lead;
 import com.eyebrow.api.entity.LeadStatus;
+import com.eyebrow.api.entity.TreatmentType;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -20,15 +22,23 @@ public class LeadService {
     @Inject
     LeadDAO leadDAO;
 
+    @Inject
+    TreatmentTypeDAO treatmentTypeDAO;
+
     @Transactional
     public LeadDTO createLead(LeadDTO dto) {
         log.info("Creating new lead: {}", dto.getName());
+
+        TreatmentType treatmentType = treatmentTypeDAO.findById(dto.getTreatmentTypeId());
+        if (treatmentType == null) {
+            throw new IllegalArgumentException("TreatmentType not found with id: " + dto.getTreatmentTypeId());
+        }
 
         Lead lead = Lead.builder()
                 .name(dto.getName())
                 .initialInterestDate(dto.getInitialInterestDate())
                 .contactInfo(dto.getContactInfo())
-                .treatmentType(dto.getTreatmentType())
+                .treatmentType(treatmentType)
                 .status(dto.getStatus() != null ? dto.getStatus() : LeadStatus.COLD)
                 .followUpDate(dto.getFollowUpDate())
                 .build();
@@ -83,10 +93,15 @@ public class LeadService {
             throw new IllegalArgumentException("Lead not found with id: " + id);
         }
 
+        TreatmentType treatmentType = treatmentTypeDAO.findById(dto.getTreatmentTypeId());
+        if (treatmentType == null) {
+            throw new IllegalArgumentException("TreatmentType not found with id: " + dto.getTreatmentTypeId());
+        }
+
         lead.setName(dto.getName());
         lead.setInitialInterestDate(dto.getInitialInterestDate());
         lead.setContactInfo(dto.getContactInfo());
-        lead.setTreatmentType(dto.getTreatmentType());
+        lead.setTreatmentType(treatmentType);
         lead.setStatus(dto.getStatus());
         lead.setFollowUpDate(dto.getFollowUpDate());
 
@@ -112,7 +127,8 @@ public class LeadService {
                 .name(lead.getName())
                 .initialInterestDate(lead.getInitialInterestDate())
                 .contactInfo(lead.getContactInfo())
-                .treatmentType(lead.getTreatmentType())
+                .treatmentTypeId(lead.getTreatmentType() != null ? lead.getTreatmentType().id : null)
+                .treatmentTypeName(lead.getTreatmentType() != null ? lead.getTreatmentType().getName() : null)
                 .status(lead.getStatus())
                 .followUpDate(lead.getFollowUpDate())
                 .build();

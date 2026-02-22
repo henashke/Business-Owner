@@ -36,8 +36,9 @@ public class Appointment extends PanacheEntity {
     @Column(name = "end_time")
     private OffsetDateTime endTime;
 
-    @Column(name = "title")
-    private String title;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "treatment_type_id")
+    private TreatmentType treatmentType;
 
     @Column(name = "notes")
     private String notes;

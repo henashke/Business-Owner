@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.OffsetDateTime;
+import java.math.BigDecimal;
 
 @Data
 @NoArgsConstructor
@@ -16,7 +17,10 @@ public class AppointmentDTO {
     private Long customerId;
     private OffsetDateTime startTime;
     private OffsetDateTime endTime;
-    private String title;
+    private Long treatmentTypeId;
+    private String treatmentTypeName;
+    private BigDecimal treatmentPrice;
+    private Integer treatmentDurationMinutes;
     private String notes;
 }
 

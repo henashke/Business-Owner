@@ -2,6 +2,7 @@ import DailyCalendarView from "./DailyCalendarView.tsx";
 import WeeklyCalendarView from "./WeeklyCalendarView.tsx";
 import CustomerList from "./CustomerList.tsx";
 import LeadList from "./LeadList.tsx";
+import TreatmentTypeList from "./TreatmentTypeList.tsx";
 import { Route, Routes } from "react-router-dom";
 
 export const Routing = () => (
@@ -11,5 +12,6 @@ export const Routing = () => (
         <Route path="/weekly" element={<WeeklyCalendarView />} />
         <Route path="/customers" element={<CustomerList />} />
         <Route path="/leads" element={<LeadList />} />
+        <Route path="/treatments" element={<TreatmentTypeList />} />
     </Routes>
 );

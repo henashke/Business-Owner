@@ -13,6 +13,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.FetchType;
 
 import java.time.LocalDate;
 
@@ -41,8 +44,9 @@ public class Lead extends PanacheEntity {
     @Column(name = "contact_info", nullable = false)
     private String contactInfo;
 
-    @Column(name = "treatment_type", nullable = false)
-    private String treatmentType;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "treatment_type_id")
+    private TreatmentType treatmentType;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)

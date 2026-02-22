@@ -7,9 +7,11 @@ import {
     InputLabel,
     Box,
     SelectChangeEvent,
+    Autocomplete,
 } from '@mui/material';
 import { LeadDTO, LeadStatus } from '../services/leadApi';
 import { GenericDialog } from './GenericDialog';
+import { useStore } from '../context/StoreContext';
 
 interface LeadFormDialogProps {
     open: boolean;
@@ -31,7 +33,7 @@ const EMPTY_FORM: Omit<LeadDTO, 'id'> = {
     name: '',
     initialInterestDate: '',
     contactInfo: '',
-    treatmentType: '',
+    treatmentTypeId: null,
     status: 'COLD',
     followUpDate: null,
 };
@@ -42,8 +44,15 @@ export const LeadFormDialog = ({
     onSave,
     lead,
 }: LeadFormDialogProps) => {
+    const { treatmentTypeStore } = useStore();
     const [formData, setFormData] = useState<Omit<LeadDTO, 'id'>>(EMPTY_FORM);
     const [saving, setSaving] = useState(false);
+
+    useEffect(() => {
+        if (open) {
+            treatmentTypeStore.fetchTreatmentTypes();
+        }
+    }, [open, treatmentTypeStore]);
 
     useEffect(() => {
         if (lead) {
@@ -51,7 +60,7 @@ export const LeadFormDialog = ({
                 name: lead.name,
                 initialInterestDate: lead.initialInterestDate,
                 contactInfo: lead.contactInfo,
-                treatmentType: lead.treatmentType,
+                treatmentTypeId: lead.treatmentTypeId,
                 status: lead.status,
                 followUpDate: lead.followUpDate ?? null,
             });
@@ -81,7 +90,7 @@ export const LeadFormDialog = ({
         !!formData.name.trim() &&
         !!formData.initialInterestDate &&
         !!formData.contactInfo.trim() &&
-        !!formData.treatmentType.trim();
+        formData.treatmentTypeId !== null;
 
     return (
         <GenericDialog
@@ -119,12 +128,16 @@ export const LeadFormDialog = ({
                     fullWidth
                 />
 
-                <TextField
-                    label="סוג טיפול *"
-                    value={formData.treatmentType}
-                    onChange={(e) => handleTextChange('treatmentType', e.target.value)}
-                    required
-                    fullWidth
+                <Autocomplete
+                    options={treatmentTypeStore.treatmentTypes}
+                    getOptionLabel={(option) => `${option.name} (₪${option.price}, ${option.durationMinutes} דק')`}
+                    value={treatmentTypeStore.treatmentTypes.find(t => t.id === formData.treatmentTypeId) || null}
+                    onChange={(_, newValue) => setFormData(prev => ({ ...prev, treatmentTypeId: newValue?.id || null }))}
+                    renderInput={(params) => (
+                        <TextField {...params} label="סוג טיפול *" required fullWidth />
+                    )}
+                    isOptionEqualToValue={(option, value) => option.id === value.id}
+                    noOptionsText="לא נמצאו סוגי טיפול"
                 />
 
                 <FormControl fullWidth>

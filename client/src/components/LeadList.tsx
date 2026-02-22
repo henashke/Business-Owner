@@ -54,7 +54,7 @@ const LeadList = observer(() => {
             (lead) =>
                 lead.name.toLowerCase().includes(query) ||
                 lead.contactInfo.toLowerCase().includes(query) ||
-                lead.treatmentType.toLowerCase().includes(query)
+                (lead.treatmentTypeName && lead.treatmentTypeName.toLowerCase().includes(query))
         );
     }, [leadStore.leads, searchQuery]);
 
@@ -187,7 +187,7 @@ const LeadList = observer(() => {
                                         }}
                                     >
                                         <TableCell>{lead.name}</TableCell>
-                                        <TableCell>{lead.treatmentType}</TableCell>
+                                        <TableCell>{lead.treatmentTypeName}</TableCell>
                                         <TableCell>{lead.initialInterestDate}</TableCell>
                                         <TableCell>{lead.contactInfo}</TableCell>
                                         <TableCell>
