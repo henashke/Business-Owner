@@ -3,9 +3,12 @@ import axios, { AxiosInstance } from 'axios';
 export interface AppointmentDTO {
   id?: number;
   customerId: number;
+  treatmentTypeId: number | null;
+  treatmentTypeName?: string;
+  treatmentPrice?: number;
+  treatmentDurationMinutes?: number;
   startTime: string; // ISO
   endTime: string; // ISO
-  title?: string;
   notes?: string;
 }
 

@@ -5,6 +5,7 @@ import SearchBar from './SearchBar';
 import FloatingActionButton from './FloatingActionButton';
 import { LeadFormDialog } from './LeadFormDialog';
 import { DeleteConfirmDialog } from './DeleteConfirmDialog';
+import { LeadViewDialog } from './LeadViewDialog';
 import { LeadDTO, LeadStatus } from '../services/leadApi';
 import LeadStatusBadge from './LeadStatusBadge';
 import {
@@ -21,6 +22,8 @@ import {
     ToggleButton,
     ToggleButtonGroup,
     Typography,
+    useMediaQuery,
+    useTheme,
 } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -28,10 +31,13 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 const LeadList = observer(() => {
     const { leadStore } = useStore();
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
     const [searchQuery, setSearchQuery] = useState('');
     const [showForm, setShowForm] = useState(false);
     const [editingLead, setEditingLead] = useState<LeadDTO | null>(null);
+    const [viewingLead, setViewingLead] = useState<LeadDTO | null>(null);
 
     const [deleteConfirmId, setDeleteConfirmId] = useState<number | null>(null);
     const [deletingId, setDeletingId] = useState<number | null>(null);
@@ -54,7 +60,7 @@ const LeadList = observer(() => {
             (lead) =>
                 lead.name.toLowerCase().includes(query) ||
                 lead.contactInfo.toLowerCase().includes(query) ||
-                lead.treatmentType.toLowerCase().includes(query)
+                (lead.treatmentTypeName && lead.treatmentTypeName.toLowerCase().includes(query))
         );
     }, [leadStore.leads, searchQuery]);
 
@@ -156,18 +162,18 @@ const LeadList = observer(() => {
                     <TableHead>
                         <TableRow>
                             <TableCell sx={{ fontWeight: 'bold' }}>שם</TableCell>
-                            <TableCell sx={{ fontWeight: 'bold' }}>טיפול</TableCell>
+                            {!isMobile && <TableCell sx={{ fontWeight: 'bold' }}>טיפול</TableCell>}
                             <TableCell sx={{ fontWeight: 'bold' }}>ת. עניין ראשוני</TableCell>
-                            <TableCell sx={{ fontWeight: 'bold' }}>יצירת קשר</TableCell>
+                            {!isMobile && <TableCell sx={{ fontWeight: 'bold' }}>יצירת קשר</TableCell>}
                             <TableCell sx={{ fontWeight: 'bold' }}>סטטוס</TableCell>
-                            <TableCell sx={{ fontWeight: 'bold' }}>ת. מעקב</TableCell>
+                            {!isMobile && <TableCell sx={{ fontWeight: 'bold' }}>ת. מעקב</TableCell>}
                             <TableCell sx={{ fontWeight: 'bold', minWidth: '140px' }}></TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {sortedLeads.length === 0 ? (
                             <TableRow>
-                                <TableCell colSpan={7} align="center" sx={{ py: 3 }}>
+                                <TableCell colSpan={isMobile ? 4 : 7} align="center" sx={{ py: 3 }}>
                                     <Typography variant="body1" color="text.secondary">
                                         לא נמצאו לידים חופפים לחיפוש/סינון.
                                     </Typography>
@@ -179,29 +185,33 @@ const LeadList = observer(() => {
                                 return (
                                     <TableRow
                                         key={lead.id}
+                                        onClick={() => setViewingLead(lead)}
                                         sx={{
                                             backgroundColor: overdue ? 'rgba(231, 76, 60, 0.08)' : 'inherit',
                                             '&:hover': {
                                                 backgroundColor: overdue ? 'rgba(231, 76, 60, 0.15)' : 'rgba(0, 0, 0, 0.04)',
                                             },
+                                            cursor: 'pointer',
                                         }}
                                     >
                                         <TableCell>{lead.name}</TableCell>
-                                        <TableCell>{lead.treatmentType}</TableCell>
+                                        {!isMobile && <TableCell>{lead.treatmentTypeName}</TableCell>}
                                         <TableCell>{lead.initialInterestDate}</TableCell>
-                                        <TableCell>{lead.contactInfo}</TableCell>
+                                        {!isMobile && <TableCell>{lead.contactInfo}</TableCell>}
                                         <TableCell>
                                             <LeadStatusBadge status={lead.status} />
                                         </TableCell>
-                                        <TableCell
-                                            sx={{
-                                                color: overdue ? '#c0392b' : 'inherit',
-                                                fontWeight: overdue ? 'bold' : 'normal',
-                                            }}
-                                        >
-                                            {lead.followUpDate || '-'}
-                                        </TableCell>
-                                        <TableCell align="left">
+                                        {!isMobile && (
+                                            <TableCell
+                                                sx={{
+                                                    color: overdue ? '#c0392b' : 'inherit',
+                                                    fontWeight: overdue ? 'bold' : 'normal',
+                                                }}
+                                            >
+                                                {lead.followUpDate || '-'}
+                                            </TableCell>
+                                        )}
+                                        <TableCell align="left" onClick={(e) => e.stopPropagation()}>
                                             <Tooltip title="ערוך">
                                                 <IconButton size="small" onClick={() => handleOpenForm(lead)}>
                                                     <EditIcon fontSize="small" />
@@ -243,6 +253,13 @@ const LeadList = observer(() => {
                 onClose={handleCloseForm}
                 onSave={handleSave}
                 lead={editingLead}
+            />
+
+            <LeadViewDialog
+                open={viewingLead !== null}
+                onClose={() => setViewingLead(null)}
+                onEdit={handleOpenForm}
+                lead={viewingLead}
             />
 
             <DeleteConfirmDialog

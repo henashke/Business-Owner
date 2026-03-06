@@ -13,7 +13,8 @@ export interface LeadDTO {
   name: string;
   initialInterestDate: string; // ISO date string: 'YYYY-MM-DD'
   contactInfo: string;
-  treatmentType: string;
+  treatmentTypeId: number | null;
+  treatmentTypeName?: string;
   status: LeadStatus;
   followUpDate?: string | null; // ISO date string or null
 }

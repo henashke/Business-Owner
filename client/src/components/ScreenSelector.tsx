@@ -5,6 +5,7 @@ export enum AvailableScreens {
     CALENDAR = 'calendar',
     CUSTOMERS = 'customers',
     LEADS = 'leads',
+    TREATMENTS = 'treatments',
 }
 
 export enum CalendarSubView {
@@ -19,6 +20,7 @@ export const ScreenSelector = () => {
     const getMainView = (): AvailableScreens => {
         if (location.pathname === '/customers') return AvailableScreens.CUSTOMERS;
         if (location.pathname === '/leads') return AvailableScreens.LEADS;
+        if (location.pathname === '/treatments') return AvailableScreens.TREATMENTS;
         return AvailableScreens.CALENDAR;
     };
 
@@ -27,7 +29,7 @@ export const ScreenSelector = () => {
     const handleMainChange = (_: React.MouseEvent<HTMLElement>, next: AvailableScreens | null) => {
         if (!next) return;
         if (next === AvailableScreens.CALENDAR) {
-            if (location.pathname === '/customers' || location.pathname === '/leads') {
+            if (location.pathname === '/customers' || location.pathname === '/leads' || location.pathname === '/treatments') {
                 navigate(`/${CalendarSubView.DAILY}`);
             } else {
                 navigate(location.pathname);
@@ -38,18 +40,19 @@ export const ScreenSelector = () => {
     };
 
     return (
-            <ToggleButtonGroup
-                value={currentMainView}
-                exclusive
-                sx={{ direction: 'ltr', paddingBottom: 2 }}
-                onChange={handleMainChange}
-                size="small"
-                aria-label="main view selector"
-            >
-                <ToggleButton value={AvailableScreens.CALENDAR}>טיפולים</ToggleButton>
-                <ToggleButton value={AvailableScreens.CUSTOMERS}>לקוחות</ToggleButton>
-                <ToggleButton value={AvailableScreens.LEADS}>לידים</ToggleButton>
-            </ToggleButtonGroup>
+        <ToggleButtonGroup
+            value={currentMainView}
+            exclusive
+            sx={{ direction: 'ltr', paddingBottom: 2 }}
+            onChange={handleMainChange}
+            size="small"
+            aria-label="main view selector"
+        >
+            <ToggleButton value={AvailableScreens.CALENDAR}>טיפולים</ToggleButton>
+            <ToggleButton value={AvailableScreens.CUSTOMERS}>לקוחות</ToggleButton>
+            <ToggleButton value={AvailableScreens.LEADS}>לידים</ToggleButton>
+            <ToggleButton value={AvailableScreens.TREATMENTS}>סוגי טיפול</ToggleButton>
+        </ToggleButtonGroup>
     )
 }
 
@@ -62,7 +65,7 @@ export const CalendarSubSelector = () => {
         return CalendarSubView.DAILY;
     };
 
-    if (location.pathname === '/customers' || location.pathname === '/leads') return null;
+    if (location.pathname === '/customers' || location.pathname === '/leads' || location.pathname === '/treatments') return null;
 
     const currentCalendarView = getCalendarView();
 

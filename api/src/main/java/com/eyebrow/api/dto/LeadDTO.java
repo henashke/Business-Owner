@@ -18,7 +18,8 @@ public class LeadDTO {
     private String name;
     private LocalDate initialInterestDate;
     private String contactInfo;
-    private String treatmentType;
+    private Long treatmentTypeId;
+    private String treatmentTypeName;
     private LeadStatus status;
     private LocalDate followUpDate;
 }
