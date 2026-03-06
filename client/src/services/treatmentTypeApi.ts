@@ -1,4 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
+import { getApiBaseUrl } from './apiConfig';
 
 export interface TreatmentTypeDTO {
   id?: number;
@@ -7,7 +8,7 @@ export interface TreatmentTypeDTO {
   durationMinutes: number;
 }
 
-const API_BASE_URL = 'http://localhost:8080/api/treatment-types';
+const API_BASE_URL = getApiBaseUrl('/treatment-types');
 
 const api: AxiosInstance = axios.create({
   baseURL: API_BASE_URL,

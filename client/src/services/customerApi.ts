@@ -1,4 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
+import { getApiBaseUrl } from './apiConfig';
 
 export interface CustomerDTO {
   id?: number;
@@ -10,7 +11,7 @@ export interface CustomerDTO {
   active: boolean;
 }
 
-const API_BASE_URL = 'http://localhost:8080/api/customers';
+const API_BASE_URL = getApiBaseUrl('/customers');
 
 const api: AxiosInstance = axios.create({
   baseURL: API_BASE_URL,
