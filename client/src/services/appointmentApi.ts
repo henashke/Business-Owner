@@ -1,4 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
+import { getApiBaseUrl } from './apiConfig';
 
 export interface AppointmentDTO {
   id?: number;
@@ -12,7 +13,7 @@ export interface AppointmentDTO {
   notes?: string;
 }
 
-const API_BASE_URL = 'http://localhost:8080/api/appointments';
+const API_BASE_URL = getApiBaseUrl('/appointments');
 
 const api: AxiosInstance = axios.create({
   baseURL: API_BASE_URL,
