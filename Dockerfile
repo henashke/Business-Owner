@@ -10,10 +10,14 @@ RUN npm run build
 
 # Stage 2: Build the Quarkus Backend
 FROM maven:3.9.6-eclipse-temurin-17 AS server-build
-WORKDIR /app/api
+WORKDIR /app
+
+# Copy parent pom
+COPY pom.xml .
 
 # Copy backend pom and resolve dependencies
-COPY api/pom.xml .
+COPY api/pom.xml api/
+WORKDIR /app/api
 RUN mvn dependency:go-offline -B
 
 # Copy backend source
