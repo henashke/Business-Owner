@@ -1,13 +1,14 @@
-import { useEffect, useMemo, useState } from 'react';
-import { observer } from 'mobx-react-lite';
-import { useStore } from '../context/StoreContext';
+import {useEffect, useMemo, useState} from 'react';
+import {observer} from 'mobx-react-lite';
+import {useStore} from '../context/StoreContext';
 import SearchBar from './SearchBar';
 import FloatingActionButton from './FloatingActionButton';
-import { TreatmentTypeFormDialog } from './TreatmentTypeFormDialog';
-import { DeleteConfirmDialog } from './DeleteConfirmDialog';
-import { TreatmentTypeDTO } from '../services/treatmentTypeApi';
+import {TreatmentTypeFormDialog} from './TreatmentTypeFormDialog';
+import {DeleteConfirmDialog} from './DeleteConfirmDialog';
+import {TreatmentTypeDTO} from '../services/treatmentTypeApi';
 import {
     Box,
+    IconButton,
     Paper,
     Table,
     TableBody,
@@ -15,7 +16,6 @@ import {
     TableContainer,
     TableHead,
     TableRow,
-    IconButton,
     Tooltip,
     Typography,
 } from '@mui/material';
@@ -23,7 +23,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 const TreatmentTypeList = observer(() => {
-    const { treatmentTypeStore } = useStore();
+    const {treatmentTypeStore} = useStore();
 
     const [searchQuery, setSearchQuery] = useState('');
     const [deleteConfirmId, setDeleteConfirmId] = useState<number | null>(null);
@@ -72,23 +72,23 @@ const TreatmentTypeList = observer(() => {
     };
 
     return (
-        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, flex: 1, paddingX: 2, paddingBottom: 2 }}>
-            <SearchBar value={searchQuery} onChange={setSearchQuery} />
+        <Box sx={{display: 'flex', flexDirection: 'column', gap: 2, flex: 1, paddingX: 2, paddingBottom: 2}}>
+            <SearchBar value={searchQuery} onChange={setSearchQuery}/>
 
-            <TableContainer component={Paper} sx={{ flex: 1, overflow: 'auto' }}>
+            <TableContainer component={Paper} sx={{flex: 1, overflow: 'auto'}}>
                 <Table stickyHeader>
                     <TableHead>
-                        <TableRow>
-                            <TableCell sx={{ fontWeight: 'bold' }}>שם הטיפול</TableCell>
-                            <TableCell sx={{ fontWeight: 'bold' }}>מחיר (₪)</TableCell>
-                            <TableCell sx={{ fontWeight: 'bold' }}>משך זמן (דקות)</TableCell>
-                            <TableCell sx={{ fontWeight: 'bold', width: '120px' }}></TableCell>
+                        <TableRow sx={{fontWeight: 'bold'}}>
+                            <TableCell>שם הטיפול</TableCell>
+                            <TableCell>מחיר (₪)</TableCell>
+                            <TableCell>משך זמן (דקות)</TableCell>
+                            <TableCell/>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {filteredTypes.length === 0 ? (
                             <TableRow>
-                                <TableCell colSpan={4} align="center" sx={{ py: 3 }}>
+                                <TableCell colSpan={4} align="center" sx={{py: 3}}>
                                     <Typography variant="body1" color="text.secondary">
                                         לא נמצאו סוגי טיפול.
                                     </Typography>
@@ -103,7 +103,7 @@ const TreatmentTypeList = observer(() => {
                                     <TableCell align="left">
                                         <Tooltip title="ערוך">
                                             <IconButton size="small" onClick={() => handleOpenForm(t)}>
-                                                <EditIcon fontSize="small" />
+                                                <EditIcon fontSize="small"/>
                                             </IconButton>
                                         </Tooltip>
                                         <Tooltip title="מחק">
@@ -112,7 +112,7 @@ const TreatmentTypeList = observer(() => {
                                                 color="error"
                                                 onClick={() => setDeleteConfirmId(t.id || null)}
                                             >
-                                                <DeleteIcon fontSize="small" />
+                                                <DeleteIcon fontSize="small"/>
                                             </IconButton>
                                         </Tooltip>
                                     </TableCell>
@@ -123,7 +123,7 @@ const TreatmentTypeList = observer(() => {
                 </Table>
             </TableContainer>
 
-            <FloatingActionButton onClick={() => handleOpenForm()} />
+            <FloatingActionButton onClick={() => handleOpenForm()}/>
 
             <TreatmentTypeFormDialog
                 open={treatmentTypeStore.showForm}
