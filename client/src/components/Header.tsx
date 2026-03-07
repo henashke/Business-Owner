@@ -19,7 +19,6 @@ export const Header = () => {
             width: '100%',
             padding: 2
         }}>
-            dsfjfhsdakjfas;kdjfvazana
             <img src={logo} alt="logo" width="50px"
                  style={{
                      top: "1rem",
