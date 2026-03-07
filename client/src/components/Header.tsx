@@ -8,7 +8,6 @@ import {ScreenSelector} from "./ScreenSelector.tsx";
 export const Header = () => {
     const {mode} = useThemeMode();
     const isDark = mode === 'dark';
-    console.log("mode", isDark)
 
     return (
         <AppBar sx={{
@@ -20,7 +19,7 @@ export const Header = () => {
             width: '100%',
             padding: 2
         }}>
-            dsfjfhsdakjfas;kdjf
+            dsfjfhsdakjfas;kdjfvazana
             <img src={logo} alt="logo" width="50px"
                  style={{
                      top: "1rem",
