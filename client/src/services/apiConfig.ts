@@ -1,8 +1,12 @@
-export const getApiBaseUrl = (path: string): string => {
+import axios, { AxiosInstance } from "axios";
+
+export const getApi = (path: string): AxiosInstance => {
   console.log(import.meta.env.PROD);
-  
-  const base = import.meta.env.PROD 
-    ? `${window.location.origin}/api` 
-    : 'http://localhost:8080/api';
-  return `${base}${path}`;
+  const apiPath = `${window.location.origin}/api/${path}`
+  return axios.create({
+    baseURL: `${apiPath}`,
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
 };

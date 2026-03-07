@@ -1,5 +1,5 @@
-import axios, { AxiosInstance } from 'axios';
-import { getApiBaseUrl } from './apiConfig';
+import {AxiosInstance} from 'axios';
+import {getApi} from './apiConfig';
 
 export type LeadStatus =
   | 'HOT'
@@ -20,14 +20,7 @@ export interface LeadDTO {
   followUpDate?: string | null; // ISO date string or null
 }
 
-const API_BASE_URL = getApiBaseUrl('/leads');
-
-const api: AxiosInstance = axios.create({
-  baseURL: API_BASE_URL,
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
+const api: AxiosInstance = getApi('/leads');
 
 export const leadApi = {
   getAll: () => api.get<LeadDTO[]>('/'),
