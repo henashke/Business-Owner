@@ -1,5 +1,5 @@
-import axios, { AxiosInstance } from 'axios';
-import { getApiBaseUrl } from './apiConfig';
+import { AxiosInstance } from 'axios';
+import { getApi } from './apiConfig';
 
 export interface AppointmentDTO {
   id?: number;
@@ -13,14 +13,7 @@ export interface AppointmentDTO {
   notes?: string;
 }
 
-const API_BASE_URL = getApiBaseUrl('/appointments');
-
-const api: AxiosInstance = axios.create({
-  baseURL: API_BASE_URL,
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
+const api: AxiosInstance = getApi('/appointments');
 
 export const appointmentApi = {
   getAll: () => api.get<AppointmentDTO[]>('/'),
