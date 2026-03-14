@@ -10,7 +10,7 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
 @Path("/")
-public class SpaFallbackResource {
+public class SpaFallbackFilter {
 
     @GET
     @Path("{path:.*}")
