@@ -82,6 +82,15 @@ export const LeadViewDialog = ({
                             {lead.followUpDate || '-'}
                         </Typography>
                     </Stack>
+
+                    <Stack spacing={1}>
+                        <Typography variant="caption" color="text.secondary">
+                            הערות
+                        </Typography>
+                        <Typography variant="body1" sx={{ fontWeight: 500, whiteSpace: 'pre-wrap' }}>
+                            {lead.notes || '-'}
+                        </Typography>
+                    </Stack>
                 </Box>
             </DialogContent>
             <DialogActions sx={{ p: 2, gap: 1 }}>

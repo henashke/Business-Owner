@@ -18,6 +18,7 @@ export interface LeadDTO {
   treatmentTypeName?: string;
   status: LeadStatus;
   followUpDate?: string | null; // ISO date string or null
+  notes?: string;
 }
 
 const api: AxiosInstance = getApi('/leads');
