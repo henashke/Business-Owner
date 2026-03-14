@@ -36,6 +36,7 @@ const EMPTY_FORM: Omit<LeadDTO, 'id'> = {
     treatmentTypeId: null,
     status: 'COLD',
     followUpDate: null,
+    notes: '',
 };
 
 export const LeadFormDialog = ({
@@ -63,6 +64,7 @@ export const LeadFormDialog = ({
                 treatmentTypeId: lead.treatmentTypeId,
                 status: lead.status,
                 followUpDate: lead.followUpDate ?? null,
+                notes: lead.notes || '',
             });
         } else {
             setFormData(EMPTY_FORM);
@@ -165,6 +167,15 @@ export const LeadFormDialog = ({
                     fullWidth
                     InputLabelProps={{ shrink: true }}
                     helperText="אופציונלי"
+                />
+
+                <TextField
+                    label="הערות"
+                    value={formData.notes || ''}
+                    onChange={(e) => handleTextChange('notes', e.target.value)}
+                    fullWidth
+                    multiline
+                    minRows={3}
                 />
             </Box>
         </GenericDialog>

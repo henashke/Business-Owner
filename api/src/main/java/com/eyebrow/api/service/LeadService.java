@@ -41,6 +41,7 @@ public class LeadService {
                 .treatmentType(treatmentType)
                 .status(dto.getStatus() != null ? dto.getStatus() : LeadStatus.COLD)
                 .followUpDate(dto.getFollowUpDate())
+                .notes(dto.getNotes())
                 .build();
 
         leadDAO.persist(lead);
@@ -104,6 +105,7 @@ public class LeadService {
         lead.setTreatmentType(treatmentType);
         lead.setStatus(dto.getStatus());
         lead.setFollowUpDate(dto.getFollowUpDate());
+        lead.setNotes(dto.getNotes());
 
         leadDAO.persist(lead);
         return mapToDTO(lead);
@@ -131,6 +133,7 @@ public class LeadService {
                 .treatmentTypeName(lead.getTreatmentType() != null ? lead.getTreatmentType().getName() : null)
                 .status(lead.getStatus())
                 .followUpDate(lead.getFollowUpDate())
+                .notes(lead.getNotes())
                 .build();
     }
 }
