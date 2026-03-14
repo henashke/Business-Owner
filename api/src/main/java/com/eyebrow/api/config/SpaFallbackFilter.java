@@ -1,4 +1,4 @@
-package com.example;
+package com.eyebrow.api.config;
 
 import java.io.InputStream;
 
