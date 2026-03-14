@@ -22,4 +22,5 @@ public class LeadDTO {
     private String treatmentTypeName;
     private LeadStatus status;
     private LocalDate followUpDate;
+    private String notes;
 }

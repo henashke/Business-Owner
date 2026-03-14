@@ -54,4 +54,7 @@ public class Lead extends PanacheEntity {
 
     @Column(name = "follow_up_date")
     private LocalDate followUpDate;
+
+    @Column(name = "notes", columnDefinition = "text")
+    private String notes;
 }
